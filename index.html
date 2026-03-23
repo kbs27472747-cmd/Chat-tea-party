@@ -161,12 +161,12 @@
     ];
 
     const results = {
-        peach: { name: "피치 우롱티", img: "peach_tea.png", desc: "당신은 파티장에 들어서자마자 시선을 사로잡는 프롬 퀸/킹! 화려하고 기분 좋은 복숭아 향처럼 웃음소리가 끊이지 않아요." },
-        hibiscus: { name: "히비스커스", img: "peach_tea.png", desc: "강렬한 붉은빛처럼 파티의 열기를 주도하는 핫 가이/걸! 톡톡 튀는 성격으로 분위기를 순식간에 달궈놓는 에너자이저예요." },
-        lemon: { name: "레몬밤 티", img: "peach_tea.png", desc: "상큼한 레몬향처럼 주변을 환하게 밝히는 스마일 메이커! 누구와도 편하게 대화하며 긴장을 풀어주는 비타민 같은 존재예요." },
-        matcha: { name: "말차 (Matcha)", img: "peach_tea.png", desc: "자신만의 색깔이 뚜렷한 힙한 트렌드 세터! 남들과는 다른 독특한 취향과 깊이 있는 매력을 가진 숨은 멋쟁이예요." },
-        rooibos: { name: "루이보스", img: "peach_tea.png", desc: "밤새 마셔도 편안한 루이보스 같은 다정한 호스트! 모두를 세심하게 챙기며 깊은 대화의 장을 만드는 따뜻한 사람이에요." },
-        green: { name: "녹차 (Green Tea)", img: "peach_tea.png", desc: "깔끔하고 담백한 시크 미니멀리스트! 소란스러움 속에서도 중심을 지키며 여유롭게 파티를 즐길 줄 아는 멋쟁이예요." }
+        peach: { name: "피치 우롱티", desc: "당신은 파티장에 들어서자마자 시선을 사로잡는 프롬 퀸/킹! 화려하고 기분 좋은 복숭아 향처럼 웃음소리가 끊이지 않아요." },
+        hibiscus: { name: "히비스커스", desc: "강렬한 붉은빛처럼 파티의 열기를 주도하는 핫 가이/걸! 톡톡 튀는 성격으로 분위기를 순식간에 달궈놓는 에너자이저예요." },
+        lemon: { name: "레몬밤 티", desc: "상큼한 레몬향처럼 주변을 환하게 밝히는 스마일 메이커! 누구와도 편하게 대화하며 긴장을 풀어주는 비타민 같은 존재예요." },
+        matcha: { name: "말차 (Matcha)", desc: "자신만의 색깔이 뚜렷한 힙한 트렌드 세터! 남들과는 다른 독특한 취향과 깊이 있는 매력을 가진 숨은 멋쟁이예요." },
+        rooibos: { name: "루이보스", desc: "밤새 마셔도 편안한 루이보스 같은 다정한 호스트! 모두를 세심하게 챙기며 깊은 대화의 장을 만드는 따뜻한 사람이에요." },
+        green: { name: "녹차 (Green Tea)", desc: "깔끔하고 담백한 시크 미니멀리스트! 소란스러움 속에서도 중심을 지키며 여유롭게 파티를 즐길 줄 아는 멋쟁이예요." }
     };
 
     let currentIdx = 0;
@@ -205,36 +205,13 @@
     }
 
     function showResult() {
-    // 1. 질문 섹션을 숨기고 결과 섹션을 표시함
-    document.getElementById('question-section').style.display = 'none';
-    const resultContainer = document.getElementById('result-container');
-    resultContainer.style.display = 'block';
-
-    // 2. 점수가 가장 높은 캐릭터(차 종류)를 계산함
-    const winner = Object.keys(totalScores).reduce((a, b) => totalScores[a] > totalScores[b] ? a : b);
-    const resultData = results[winner];
-
-    // 3. 화면에 뿌려줄 이미지 HTML 구조 생성
-    // resultData.img에 저장된 파일 경로를 사용해 이미지 태그를 만듭니다.
-    const imgHtml = `
-        <div style="margin-bottom: 25px;">
-            <img src="${resultData.img}" 
-                 alt="${resultData.name}" 
-                 style="width: 100%; max-width: 320px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 2px solid #000;">
-        </div>
-    `;
-
-    // 4. 결과창의 각 요소에 데이터를 집어넣음
-    // innerHTML을 사용하여 이미지와 이름을 함께 넣습니다.
-    document.getElementById('result-tea').innerHTML = imgHtml + `<div>${resultData.name}</div>`;
-    
-    // 설명 텍스트 삽입
-    document.getElementById('result-desc').innerText = resultData.desc;
-
-    // 5. 페이지 최상단으로 스크롤 이동 (결과를 바로 볼 수 있게)
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+        document.getElementById('question-section').style.display = 'none';
+        document.getElementById('result-container').style.display = 'block';
+        const winner = Object.keys(totalScores).reduce((a, b) => totalScores[a] > totalScores[b] ? a : b);
+        document.getElementById('result-tea').innerText = results[winner].name;
+        document.getElementById('result-desc').innerText = results[winner].desc;
     }
+
 
     function goToReservation() {
         alert('4월 3일 파티 예약 페이지로 이동합니다!');
